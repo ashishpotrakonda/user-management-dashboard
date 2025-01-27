@@ -1,0 +1,88 @@
+.user-form-container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-form-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #ffffff;
+  z-index: 3;
+  border-radius: 10px;
+}
+
+.user-form-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.user-form-container h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  align-self: center;
+}
+
+.user-form-container-edit-heading {
+  color: #0bda51;
+}
+
+.user-form-container-add-heading {
+  color: #007fff;
+}
+
+.user-form-container label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.user-form-container input {
+  font-size: 15px;
+  padding: 6px;
+  margin-bottom: 12px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.user-form-container button {
+  font-size: 15px;
+  margin-top: 6px;
+  padding: 7px 10px;
+  border-width: 0;
+  border-radius: 5px;
+  align-self: center;
+  cursor: pointer;
+}
+
+.user-form-container-update-button {
+  background-color: #0bda51;
+}
+
+.user-form-container-add-button {
+  background-color: #007fff;
+}
+
+@media screen and (min-width: 768px) {
+  .user-form-container label {
+    font-size: 13px;
+  }
+
+  .user-form-container input {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .user-form-container button {
+    font-size: 16px;
+  }
+}
