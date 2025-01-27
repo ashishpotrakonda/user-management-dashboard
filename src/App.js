@@ -1,8 +1,10 @@
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
-    <div>App</div>
+    <div className="app-container">
+      <h1 className="app-heading">USER MANAGEMENT DASHBOARD</h1>
+    </div>
   );
 }
 
