@@ -14,12 +14,6 @@
   align-items: center;
 }
 
-@media screen and (min-width: 768px) {
-  .app-container {
-    padding: 20px;
-  }
-}
-
 .app-heading {
   color: #4682b4;
   font-size: 24px;
@@ -28,8 +22,27 @@
   margin-bottom: 20px;
 }
 
+.app-button {
+  margin-top: 20px;
+  font-size: 15px;
+  background-color: #007fff;
+  padding: 7px 10px;
+  border-width: 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 768px) {
+  .app-container {
+    padding: 20px;
+  }
+
   .app-heading {
     font-size: 30px;
+  }
+
+  .app-button {
+    font-size: 18px;
+    padding: 10px 15px;
   }
 }
