@@ -11,6 +11,7 @@ class UserForm extends Component {
     name: "",
     email: "",
     company: "",
+    showErrorMessage: false,
   };
 
   componentDidUpdate(prevProps) {
@@ -47,20 +48,32 @@ class UserForm extends Component {
 
   onClickUpdateButton = (event) => {
     event.preventDefault();
-    const { updateUserDetails } = this.props;
     const { id, name, email, company } = this.state;
-    updateUserDetails({ id, name, email, company });
+    if (name === "" || email === "" || company === "") {
+      this.setState({
+        showErrorMessage: true,
+      });
+      return;
+    }
+    this.props.updateUserDetails({ id, name, email, company });
     this.setState({
       id: "",
       name: "",
       email: "",
       company: "",
+      showErrorMessage: false,
     });
   };
 
   onClickAddButton = (event) => {
     event.preventDefault();
     const { name, email, company } = this.state;
+    if (name === "" || email === "" || company === "") {
+      this.setState({
+        showErrorMessage: true,
+      });
+      return;
+    }
     this.props.addUser({
       name,
       email,
@@ -70,13 +83,13 @@ class UserForm extends Component {
       name: "",
       email: "",
       company: "",
+      showErrorMessage: false,
     });
   };
 
   render() {
-    const { name, email, company } = this.state;
+    const { name, email, company, showErrorMessage } = this.state;
     const selectedUserDetails = this.props.selectedUserDetails;
-    console.log(selectedUserDetails);
 
     return (
       <Modal
@@ -117,6 +130,11 @@ class UserForm extends Component {
             id="company"
             onChange={this.onChangeCompanyInputField}
           />
+          {showErrorMessage && (
+            <p className="user-form-container-error-message">
+              Fill all fields.
+            </p>
+          )}
           {selectedUserDetails.id ? (
             <button
               className="user-form-container-update-button"

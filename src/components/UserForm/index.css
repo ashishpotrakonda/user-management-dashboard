@@ -72,7 +72,17 @@
   background-color: #007fff;
 }
 
+.user-form-container-error-message {
+  color: #dc143c;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
 @media screen and (min-width: 768px) {
+  .user-form-container h1 {
+    font-size: 25px;
+  }
+
   .user-form-container label {
     font-size: 13px;
   }
@@ -83,6 +93,10 @@
   }
 
   .user-form-container button {
+    font-size: 16px;
+  }
+
+  .user-form-container-error-message {
     font-size: 16px;
   }
 }
