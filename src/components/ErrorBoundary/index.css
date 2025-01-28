@@ -1,0 +1,17 @@
+.error-boundary-container {
+  height: 100vh;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.error-boundary-container h1 {
+  color: #dc143c;
+  font-size: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .error-boundary-container h1 {
+    font-size: 30px;
+  }
+}
