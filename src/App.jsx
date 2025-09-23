@@ -114,14 +114,14 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="m-4 flex justify-between items-center">
+      <div className="m-4 flex flex-wrap justify-between items-center gap-3">
         <button
           onClick={() => setIsUserFormModalOpen(true)}
           className="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg shadow hover:bg-indigo-700 transition"
         >
           Add New User
         </button>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <div className="relative flex">
             <BsSearch className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
             <input
