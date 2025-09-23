@@ -4,12 +4,15 @@ import Navbar from "./components/Navbar";
 import UserTable from "./components/UserTable";
 import UserFormModal from "./components/UserFormModal";
 
+import { BsSearch } from "react-icons/bs";
+
 import "./App.css";
 
 function App() {
   const [users, setUsers] = useState([]);
   const [isUserFormModalOpen, setIsUserFormModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const addUser = (user) => {
     const id = users.length > 0 ? users[users.length - 1].id + 1 : 1;
@@ -75,6 +78,13 @@ function App() {
     }
   };
 
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.company.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
@@ -92,14 +102,28 @@ function App() {
   return (
     <>
       <Navbar />
-      <button
-        onClick={() => setIsUserFormModalOpen(true)}
-        className="px-4 py-2 mt-4 ml-4 bg-indigo-600 text-white text-sm rounded-lg shadow hover:bg-indigo-700 transition"
-      >
-        Add New User
-      </button>
+      <div className="mx-4 mt-4 flex justify-between items-center">
+        <button
+          onClick={() => setIsUserFormModalOpen(true)}
+          className="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg shadow hover:bg-indigo-700 transition"
+        >
+          Add New User
+        </button>
+        <div className="flex gap-2">
+          <div className="relative">
+            <BsSearch className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="Search"
+              className="pl-10 pr-3 py-[5px] border rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        </div>
+      </div>
       <UserTable
-        users={users}
+        users={filteredUsers}
         setSelectedUser={setSelectedUser}
         setIsUserFormModalOpen={setIsUserFormModalOpen}
         deleteUser={deleteUser}
