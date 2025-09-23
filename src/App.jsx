@@ -14,6 +14,7 @@ function App() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState("");
+  const [filterKey, setFilterKey] = useState("");
 
   const addUser = (user) => {
     const id = users.length > 0 ? users[users.length - 1].id + 1 : 1;
@@ -79,12 +80,17 @@ function App() {
     }
   };
 
-  const filteredUsers = users.filter(
-    (user) =>
-      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.company.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredUsers = users.filter((user) => {
+    if (!filterKey) {
+      return (
+        user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.company.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    } else {
+      return user[filterKey].toLowerCase().includes(searchQuery.toLowerCase());
+    }
+  });
 
   const sortedUsers = [...filteredUsers].sort((a, b) => {
     if (!sortKey) return 0;
@@ -126,6 +132,16 @@ function App() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
+          <select
+            value={filterKey}
+            onChange={(e) => setFilterKey(e.target.value)}
+            className="border px-2 py-1.5 rounded"
+          >
+            <option value="">Filter</option>
+            <option value="name">Name</option>
+            <option value="email">Email</option>
+            <option value="company">Company</option>
+          </select>
           <select
             value={sortKey}
             onChange={(e) => setSortKey(e.target.value)}
