@@ -13,7 +13,7 @@ const UserTable = ({
   };
 
   return (
-    <div className="overflow-x-auto p-4 rounded-lg">
+    <div className="overflow-x-auto px-4 rounded-lg">
       <table className="w-full text-sm lg:text-base border border-gray-300 border-collapse rounded-lg">
         <thead>
           <tr className="bg-gray-200 text-left">
