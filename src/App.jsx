@@ -12,6 +12,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [isUserFormModalOpen, setIsUserFormModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [visibleUsersCount, setVisibleUsersCount] = useState(20);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState("");
   const [filterKey, setFilterKey] = useState("");
@@ -97,6 +98,8 @@ function App() {
     return a[sortKey].localeCompare(b[sortKey]);
   });
 
+  const visibleUsers = sortedUsers.slice(0, visibleUsersCount);
+
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
@@ -110,6 +113,20 @@ function App() {
         setUsers(users);
       });
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const bottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 50;
+      if (bottom && visibleUsersCount < sortedUsers.length) {
+        setVisibleUsersCount((prev) => prev + 25);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [visibleUsersCount, sortedUsers.length]);
 
   return (
     <>
@@ -154,7 +171,7 @@ function App() {
         </div>
       </div>
       <UserTable
-        users={sortedUsers}
+        users={visibleUsers}
         setSelectedUser={setSelectedUser}
         setIsUserFormModalOpen={setIsUserFormModalOpen}
         deleteUser={deleteUser}
