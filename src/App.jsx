@@ -23,6 +23,22 @@ function App() {
     setSelectedUser(null);
   };
 
+  const deleteUser = async (id) => {
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/users/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        setUsers(users.filter((user) => user.id !== id));
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
+
   const onSubmitForm = async (user) => {
     if (selectedUser) {
       try {
@@ -86,6 +102,7 @@ function App() {
         users={users}
         setSelectedUser={setSelectedUser}
         setIsUserFormModalOpen={setIsUserFormModalOpen}
+        deleteUser={deleteUser}
       />
       {isUserFormModalOpen && (
         <UserFormModal

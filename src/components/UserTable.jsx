@@ -1,7 +1,12 @@
 import { BsPencil } from "react-icons/bs";
 import { BsTrash3 } from "react-icons/bs";
 
-const UserTable = ({ users, setSelectedUser, setIsUserFormModalOpen }) => {
+const UserTable = ({
+  users,
+  setSelectedUser,
+  setIsUserFormModalOpen,
+  deleteUser,
+}) => {
   const onClickEditButton = (user) => {
     setSelectedUser(user);
     setIsUserFormModalOpen(true);
@@ -34,7 +39,10 @@ const UserTable = ({ users, setSelectedUser, setIsUserFormModalOpen }) => {
                   >
                     <BsPencil />
                   </button>
-                  <button className="text-red-500 hover:text-red-700 ml-4">
+                  <button
+                    className="text-red-500 hover:text-red-700 ml-4"
+                    onClick={() => deleteUser(user.id)}
+                  >
                     <BsTrash3 />
                   </button>
                 </div>
