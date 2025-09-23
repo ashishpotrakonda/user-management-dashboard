@@ -1,16 +1,16 @@
 import { useState } from "react";
 
-const UserFormModal = ({ addUser, onClose }) => {
-  const [name, setName] = useState("");
-  const [company, setCompany] = useState("");
-  const [email, setEmail] = useState("");
+const UserFormModal = ({ selectedUser, onSubmitForm, onClose }) => {
+  const [name, setName] = useState(selectedUser?.name || "");
+  const [company, setCompany] = useState(selectedUser?.company || "");
+  const [email, setEmail] = useState(selectedUser?.email || "");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!name.trim() || !company.trim() || !email.trim()) return;
 
-    addUser({ name, company, email });
+    onSubmitForm({ id: selectedUser?.id, name, company, email });
     setName("");
     setCompany("");
     setEmail("");
@@ -55,7 +55,7 @@ const UserFormModal = ({ addUser, onClose }) => {
               type="submit"
               className="px-3 py-1 rounded bg-green-500 text-white hover:bg-green-600"
             >
-              Add
+              {selectedUser ? "Update" : "Add"}
             </button>
           </div>
         </form>

@@ -9,10 +9,54 @@ import "./App.css";
 function App() {
   const [users, setUsers] = useState([]);
   const [isUserFormModalOpen, setIsUserFormModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const addUser = (user) => {
     const id = users.length > 0 ? users[users.length - 1].id + 1 : 1;
-    setUsers([...users, { id, ...user }]);
+    setUsers([...users, { ...user, id }]);
+  };
+
+  const updateUser = (updatedUser) => {
+    setUsers(
+      users.map((user) => (user.id === updatedUser.id ? updatedUser : user))
+    );
+    setSelectedUser(null);
+  };
+
+  const onSubmitForm = async (user) => {
+    if (selectedUser) {
+      try {
+        const response = await fetch(
+          `https://jsonplaceholder.typicode.com/users/${user.id}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(user),
+          }
+        );
+        if (response.ok) {
+          updateUser(user);
+        }
+      } catch (error) {
+        console.error("Error updating user:", error);
+      }
+    } else {
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/users",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(user),
+          }
+        );
+        if (response.ok) {
+          addUser(user);
+        }
+      } catch (error) {
+        console.error("Error adding user:", error);
+      }
+    }
   };
 
   useEffect(() => {
@@ -40,12 +84,13 @@ function App() {
       </button>
       <UserTable
         users={users}
-        addUser={addUser}
-        onClose={() => setIsUserFormModalOpen(false)}
+        setSelectedUser={setSelectedUser}
+        setIsUserFormModalOpen={setIsUserFormModalOpen}
       />
       {isUserFormModalOpen && (
         <UserFormModal
-          addUser={addUser}
+          selectedUser={selectedUser}
+          onSubmitForm={onSubmitForm}
           onClose={() => {
             setIsUserFormModalOpen(false);
           }}
