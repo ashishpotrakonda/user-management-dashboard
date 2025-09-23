@@ -4,16 +4,21 @@ const UserFormModal = ({ selectedUser, onSubmitForm, onClose }) => {
   const [name, setName] = useState(selectedUser?.name || "");
   const [company, setCompany] = useState(selectedUser?.company || "");
   const [email, setEmail] = useState(selectedUser?.email || "");
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name.trim() || !company.trim() || !email.trim()) return;
+    if (!name.trim() || !company.trim() || !email.trim()) {
+      setShowErrorMessage(true);
+      return;
+    }
 
     onSubmitForm({ id: selectedUser?.id, name, company, email });
     setName("");
     setCompany("");
     setEmail("");
+    setError("");
     onClose();
   };
 
@@ -43,6 +48,11 @@ const UserFormModal = ({ selectedUser, onSubmitForm, onClose }) => {
             className="w-full p-2 border border-gray-300 rounded mb-3"
             onChange={(e) => setCompany(e.target.value)}
           />
+          {showErrorMessage && (
+            <p className="text-red-500 text-sm mb-3">
+              Please fill out all fields.
+            </p>
+          )}
           <div className="text-sm flex justify-end gap-2">
             <button
               type="button"
