@@ -18,14 +18,16 @@ const UserFormModal = ({ selectedUser, onSubmitForm, onClose }) => {
     setName("");
     setCompany("");
     setEmail("");
-    setError("");
+    setShowErrorMessage(false);
     onClose();
   };
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
       <div className="bg-white p-7 rounded-lg w-[300px]">
-        <h2 className="text-xl font-semibold mb-2">Add User</h2>
+        <h2 className="text-xl font-semibold mb-3">
+          {selectedUser ? "Update User" : "Add User"}
+        </h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
