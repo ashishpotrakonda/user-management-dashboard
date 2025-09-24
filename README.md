@@ -1,12 +1,80 @@
-# React + Vite
+```
+# User Management Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based user management dashboard built with Vite + React + TailwindCSS.
+The project demonstrates CRUD operations, searching, sorting, filtering, and infinite scrolling using the JSONPlaceholder API.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Overview
+This application allows users to:
+- View a list of users
+- Add, edit, and delete users
+- Search and filter users by different fields
+- Sort data by ID, Name, Email, or Company
+- Scroll infinitely to load more data dynamically
+- Handle form validation with user-friendly error messages
 
-## Expanding the ESLint configuration
+Note: JSONPlaceholder simulates API success but does not persist data permanently.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Setup Instructions
+
+1. Clone the repository:
+   git clone https://github.com/ashishpotrakonda/user-management-dashboard.git
+   cd user-management-dashboard
+
+2. Install dependencies:
+   npm install
+
+---
+
+## Run Instructions
+
+Start the development server:
+   npm run dev
+
+Then open in your browser:
+   http://localhost:5173
+
+Build for production:
+   npm run build
+   npm run preview
+
+---
+
+## Tech Stack
+- React (with Vite)
+- TailwindCSS
+
+---
+
+## Features Implemented
+- Responsive user table
+- Add/Edit/Delete user with modals
+- Client-side search, filter, and sorting
+- Infinite scrolling for large datasets
+- Basic validation for empty form fields
+
+---
+
+## Reflections
+
+### Challenges Faced
+- Asynchronous API calls: Handling mock responses from JSONPlaceholder which don’t persist data.
+- Infinite scrolling logic: Detecting when the user reaches the bottom of the page and dynamically loading more rows.
+- Responsive layout: Ensuring buttons and input fields do not overlap on smaller screens.
+
+### Improvements
+If given more time, I would:
+- Implement a real backend for persistent CRUD operations.
+- Add more robust form validation with error messages per field.
+- Improve UI/UX with a design system.
+- Add authentication for secure user management.
+
+---
+
+## Deployed Link
+Live Demo: https://user-management-dashboard-1y89.vercel.app/
+```
